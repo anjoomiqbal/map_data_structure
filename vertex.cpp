@@ -17,7 +17,7 @@
 #include "roadmap.h"
 using namespace std;
 
-//vertex::vertex();
+vertex::vertex(){}
 
 vertex::vertex(int vertexTypeInput, string nameInput, int vertexNum){
     this->vertexNumber   = vertexNum;
@@ -41,20 +41,6 @@ bool vertex::addEdgeToAvailableEdgeList(edge* edgeToAdd) {
     this->availableEdges.push_back(edgeToAdd);
 }
 
-int vertex::vertexTypeStringToInt(string vertexTypeString){
-    int vertexTypeInt = -1;
-    if (!vertexTypeString.compare("POI") || 
-        !vertexTypeString.compare("poi") ||
-        !vertexTypeString.compare("POINT_OF_INTEREST") ||
-        !vertexTypeString.compare("point_of_interest") ){
-        vertexTypeInt = 1;
-    }
-    if (!vertexTypeString.compare("INTERSECTION") || 
-        !vertexTypeString.compare("intersection")){
-        vertexTypeInt = 2;
-    }
-    return vertexTypeInt;
-}
 
 
 

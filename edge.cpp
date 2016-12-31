@@ -24,6 +24,7 @@
 #include "roadmap.h"
 using namespace std;
 
+edge::edge(){}
 
 edge::edge(vertex* vertex1, vertex* vertex2, int directional, double speed, double length) {
     this->edgePostedSpeedLimit      = speed;

@@ -23,7 +23,6 @@
 #include <stack>
 
 #include "vertex.h"
-#include "edge.h"
 #include "roadmap.h"
 using namespace std;
 
@@ -53,6 +52,7 @@ class edge {
         int edgeDirectionStringToInt (string directional);
         
     public:
+        edge();
         edge(vertex* vertex1, vertex* vertex2, int directional, double speed, double length);
         virtual ~edge();
         

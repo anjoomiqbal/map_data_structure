@@ -16,7 +16,6 @@
 #include <stack>
 
 #include "vertex.h"
-#include "edge.h"
 #include "roadmap.h"
 using namespace std;
 
@@ -30,6 +29,7 @@ class vertex {
         list<edge*> availableEdges;
         
     public:
+        vertex();
         vertex(int vertexTypeInput, string nameInput, int vertexNum);
         virtual ~vertex();
         
@@ -38,7 +38,6 @@ class vertex {
         int         GetVertexType() const;
         list<edge*> GetAvailableEdges() const;
         
-        int         vertexTypeStringToInt(string vertexTypeString);
         bool        addEdgeToAvailableEdgeList(edge* edgeToAdd);
 };
 

@@ -27,20 +27,22 @@ class edge;
 class roadmap {
 private:
     list<vertex*> allVertexInRoadmap;
-    list<edge*> allEdgeInRoadmap;
-    int         totalVertexCount;
+    list<edge*>   allEdgeInRoadmap;
+    int           totalVertexCount;
 //    list<list edge*> allKnownPaths;
 
     list<edge*>     getAllEdgeInRoadmap() const;
     list<vertex*>   getAllVertexInRoadmap() const;
     int             getTotalVertexCount();
     
+    int         vertexTypeStringToInt(string vertexTypeString);
+    
 public:
     roadmap();
 //    roadmap(const roadmap& orig);
     virtual ~roadmap();
 
-    int     addVertex(int vertexType, string label);
+    bool    addVertex(string vertexType, string label);
     int     addEdge(vertex vertex1, vertex vertex2, int directional, double speed, double length);
     int     edgeEvent(edge edgename, int edgeEventType);
     bool    road(edge edges[]);
