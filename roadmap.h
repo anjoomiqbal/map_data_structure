@@ -12,7 +12,7 @@
 #include <limits.h>
 #include <float.h>
 #include <string>
-#include <list>
+#include <vector>
 #include <stack>
 
 #include "vertex.h"
@@ -26,16 +26,16 @@ class edge;
 
 class roadmap {
 private:
-    list<vertex*> allVertexInRoadmap;
-    list<edge*>   allEdgeInRoadmap;
-    int           totalVertexCount;
-//    list<list edge*> allKnownPaths;
+    vector<vertex> allVertexInRoadmap;
+    vector<edge>   allEdgeInRoadmap;
+    int            totalVertexCount;
+//    vector<vector edge*> allKnownPaths;
 
-    list<edge*>     getAllEdgeInRoadmap() const;
-    list<vertex*>   getAllVertexInRoadmap() const;
+    vector<edge>    getAllEdgeInRoadmap() const;
+    vector<vertex>  getAllVertexInRoadmap() const;
     int             getTotalVertexCount();
     
-    int         vertexTypeStringToInt(string vertexTypeString);
+    int             vertexTypeStringToInt(string vertexTypeString);
     
 public:
     roadmap();

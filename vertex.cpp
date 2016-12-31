@@ -9,7 +9,7 @@
 #include <limits.h>
 #include <float.h>
 #include <string>
-#include <list>
+#include <vector>
 #include <stack>
 
 #include "vertex.h"
@@ -32,10 +32,10 @@ vertex::~vertex(){
 //    totalVertexCount--;
 }
 
-int         vertex::GetVertexNumber()   const {return vertexNumber;}
-string      vertex::GetVertexName()     const {return vertexName;}
-int         vertex::GetVertexType()     const {return vertexType;}
-list<edge*> vertex::GetAvailableEdges() const {return availableEdges;}
+int           vertex::GetVertexNumber()   const {return vertexNumber;}
+string        vertex::GetVertexName()     const {return vertexName;}
+int           vertex::GetVertexType()     const {return vertexType;}
+vector<edge*> vertex::GetAvailableEdges() const {return availableEdges;}
 
 bool vertex::addEdgeToAvailableEdgeList(edge* edgeToAdd) {
     this->availableEdges.push_back(edgeToAdd);

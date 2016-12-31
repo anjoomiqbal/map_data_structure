@@ -9,7 +9,7 @@
 #include <limits.h>
 #include <float.h>
 #include <string>
-#include <list>
+#include <vector>
 #include <stack>
 
 #include "vertex.h"
@@ -19,7 +19,9 @@ using namespace std;
 
 roadmap::roadmap() {
     this->totalVertexCount = 0;
-//    this->allVertexInRoadmap = new list<typename _Tp,typename _Alloc=std::allocator<_Tp>>;
+//    vector<vertex> allVertexInRoadmap;
+//    vector<edge> allEdgeInRoadmap;
+//    this->allVertexInRoadmap = new vector<typename _Tp,typename _Alloc=std::allocator<_Tp>>;
 //    this->allEdgeInRoadmap.;
 //    this->allKnownPaths = NULL;
 }
@@ -33,8 +35,8 @@ roadmap::~roadmap() {
 //    this->allKnownPaths.clear();   
 }
 
-list<edge*>    roadmap::getAllEdgeInRoadmap() const    {return allEdgeInRoadmap;}
-list<vertex*>  roadmap::getAllVertexInRoadmap() const  {return allVertexInRoadmap;}
+vector<edge>   roadmap::getAllEdgeInRoadmap() const    {return allEdgeInRoadmap;}
+vector<vertex> roadmap::getAllVertexInRoadmap() const  {return allVertexInRoadmap;}
 int            roadmap::getTotalVertexCount()          {return totalVertexCount;}
 
 
@@ -42,18 +44,12 @@ int            roadmap::getTotalVertexCount()          {return totalVertexCount;
 
 bool roadmap::addVertex(string vertexType, string label){
     
-//    for (this->allVertexInRoadmap::iterator i = this->allVertexInRoadmap.begin(); 
-//         i != this->allVertexInRoadmap.end(); 
-//            i++) {
-//        if (i )->GetVertexName().compare(label) == 0){
-//        if ((i)->GetVertexName().compare(label) == 0){
-//            cerr << "Failed: addVertex: Vertex already exists!" << endl;
-//            return false;
-//        }
-//        else {
-//            
-//        }
-//    }
+    for (int i = 0; i < (int)allVertexInRoadmap.size(); i++) {
+        if ( allVertexInRoadmap[i].GetVertexName().compare(label) == 0){
+            cerr << "Failed: addVertex: Vertex already exists at i = " << allVertexInRoadmap[i].GetVertexNumber()  << endl;
+            return false;
+        }
+    }
     
     
     int vType = this->vertexTypeStringToInt(vertexType);
@@ -65,8 +61,8 @@ bool roadmap::addVertex(string vertexType, string label){
     
 //    vertex v = vertex(vType, label, this->totalVertexCount);
 //    vertex;
-    class vertex v1(vType, label, ++totalVertexCount);
-    this->allVertexInRoadmap.push_back(&v1);
+    class vertex v(vType, label, ++totalVertexCount);
+    allVertexInRoadmap.push_back(v);
     cerr << "Success: addVertex: Vertex " << label << " added to the map" << endl;
     cerr << "Success: addVertex: allVertexInRoadmap.size() = " << allVertexInRoadmap.size() << endl;
     cerr << "Success: addVertex: totalVertexCount          = " << totalVertexCount << endl;

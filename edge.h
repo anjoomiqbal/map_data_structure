@@ -19,7 +19,7 @@
 #include <limits.h>
 #include <float.h>
 #include <string>
-#include <list>
+#include <vector>
 #include <stack>
 
 #include "vertex.h"

@@ -12,7 +12,7 @@
 #include <limits.h>
 #include <float.h>
 #include <string>
-#include <list>
+#include <vector>
 #include <stack>
 
 #include "vertex.h"
@@ -23,22 +23,22 @@ class edge;
 
 class vertex {
     private:
-        int         vertexNumber;
-        string      vertexName;
-        int         vertexType;     
-        list<edge*> availableEdges;
+        int           vertexNumber;
+        string        vertexName;
+        int           vertexType;     
+        vector<edge*> availableEdges;
         
     public:
         vertex();
         vertex(int vertexTypeInput, string nameInput, int vertexNum);
         virtual ~vertex();
         
-        int         GetVertexNumber() const;
-        string      GetVertexName() const;
-        int         GetVertexType() const;
-        list<edge*> GetAvailableEdges() const;
+        int           GetVertexNumber() const;
+        string        GetVertexName() const;
+        int           GetVertexType() const;
+        vector<edge*> GetAvailableEdges() const;
         
-        bool        addEdgeToAvailableEdgeList(edge* edgeToAdd);
+        bool          addEdgeToAvailableEdgeList(edge* edgeToAdd);
 };
 
 
