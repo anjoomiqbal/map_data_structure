@@ -45,3 +45,21 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+build/Debug/Cygwin-Windows/main.o
+*.inc
+*.o
+build/Debug/Cygwin-Windows/roadmap.o.d
+*.d
+*.mk
+roadmap.exe.stackdump
+*.pdf
+report3.docx
+*.h
+project/vertex.cpp
+*.cpp
+project.zip
+project/Makefile
+*.xml
+*.bash
+nbproject/private/launcher.properties
+*.exe
