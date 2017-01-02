@@ -23,36 +23,36 @@
 #include <stack>
 
 #include "vertex.h"
+#include "road.h"
 #include "roadmap.h"
+
 using namespace std;
 
 class vertex;
 
 class edge {
     private:
-        string  edgeName;
-        double  edgeLength;
-        double  edgePostedSpeedLimit;
-        double  edgeEffectiveSpeedLimit;
+        string  edgeName;       // name of the edge
+        double  edgeLength;     // length of the edge
+        double  edgePostedSpeedLimit;    // originally posted speed limit in the edge 
+        double  edgeEffectiveSpeedLimit; // to keep track of speed limit after edge events
+        double  timeToTravel;   // to keep track of time needed to tavel this edge
         int     edgeDirection;  // 1 = one way, 
                                 // 2 = two way, 
                                 // other val = invalid
         
         int     edgeEvent;      // 0 = EVENT_NORMAL, 
-                                // 1 = EVENT_ACCIDENT_1_WAY, 
-                                // 2 = EVENT_ACCIDENT_2_WAY, 
-                                // 3 = EVENT_ROADBLOCK_1_WAY, 
-                                // 4 = EVENT_ROADBLOCK_2_WAY, 
-                                // 5 = EVENT_CONSTRUCTION_1_WAY, 
-                                // 6 = EVENT_CONSTRUCTION_2_WAY, 
-        vertex* sourceVertex;
-        vertex* destinationVertex;
+                                // 1 = EVENT_ACCIDENT, 
+                                // 2 = EVENT_ROADBLOCK, 
+                                // 3 = EVENT_CONSTRUCTION, 
+                                // other val = invalid
+        vertex* sourceVertex;       // the pointed of the vertex from where the edge started
+        vertex* destinationVertex;  // the pointed of the vertex to where the edge ended
         
-        int edgeEventStringToInt (string eventName);
-        int edgeDirectionStringToInt (string directional);
         
     public:
         edge();
+        edge(string nameInput);
         edge(vertex* vertex1, vertex* vertex2, int directional, double speed, double length);
         virtual ~edge();
         
@@ -64,6 +64,16 @@ class edge {
         int     GetEdgeEvent() const;
         vertex* GetSourceVertex() const;
         vertex* GetDestinationVertex() const;
+        double  GetTimeToTravel() const;
+        void    SetTimeToTravel(double timeToTravel);
+    
+        void SetEdgeEffectiveSpeedLimit(double edgeEffectiveSpeedLimit);
+        void SetEdgeEvent(int edgeEvent);
+
+
+
+    
+
         
 };
 

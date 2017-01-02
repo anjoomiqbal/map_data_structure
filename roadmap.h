@@ -8,6 +8,7 @@
 #define ROADMAP_H
 
 #include <iostream>
+#include <cstddef>
 #include <stdlib.h>
 #include <limits.h>
 #include <float.h>
@@ -17,42 +18,53 @@
 
 #include "vertex.h"
 #include "edge.h"
-#include "roadmap.h"
+#include "road.h"
 
 using namespace std;
 
 class vertex;
 class edge;
+class road;
 
 class roadmap {
 private:
-    vector<vertex> allVertexInRoadmap;
-    vector<edge>   allEdgeInRoadmap;
-    int            totalVertexCount;
-//    vector<vector edge*> allKnownPaths;
+    vector<vertex>  allVertexInRoadmap; // to store all the vertex objects
+    vector<vertex>  allPOIInRoadmap;    // to store all the vertex objects that are POI
+    vector<edge>    allEdgeInRoadmap;   // to store all the edge objects
+    vector<road>    allRoadsInRoadmap;  // to store all the road objects
+    int             totalVertexCount;   // to store all the total number of vertex objects
+    int             totalEdgeCount;     // to store all the total number of edge objects
+    vector<vertex>  nullVertex;         // to store 1 null vertex object
+    vector<edge>    nullEdge;           // to store 1 null edge object
 
-    vector<edge>    getAllEdgeInRoadmap() const;
-    vector<vertex>  getAllVertexInRoadmap() const;
-    int             getTotalVertexCount();
     
     int             vertexTypeStringToInt(string vertexTypeString);
+    int             getVertexIndex(string vertexName);
+    int             getEdgeIndex(string edgeName);
+    int             edgeDirectionStringToInt (string directional);
+    int             edgeEventStringToInt (string eventName);
+    string          toUpper(string str);
     
 public:
-    roadmap();
-//    roadmap(const roadmap& orig);
-    virtual ~roadmap();
-
-    bool    addVertex(string vertexType, string label);
-    int     addEdge(vertex vertex1, vertex vertex2, int directional, double speed, double length);
-    int     edgeEvent(edge edgename, int edgeEventType);
-    bool    road(edge edges[]);
-    edge*   trip(vertex fromVertex, vertex toVertex);
-    vertex  vertex(string vertexName);
-    int     store(string filename);
-    int     retrieve(string filename);
-    bool    printMapGraph();
-    bool    freeMapGraph();
-
+                    roadmap();
+    virtual         ~roadmap();
+    vector<vertex>  getAllVertexInRoadmap() const;
+    vector<edge>    getAllEdgeInRoadmap() const;
+    vector<road>    getAllRoadsInRoadmap() const;
+    int             getTotalVertexCount() const;
+    int             getTotalEdgeCount() const;
+    vector<vertex>  getNullVertex() const;
+    vector<edge>    getNullEdge() const;
+    
+    bool            addVertex(string vertexType, string label);
+    bool            addEdge(string vertex1, string vertex2, string directional, double speed, double length);
+    bool            edgeEvent(string edgeName, string edgeEventType);
+    vertex*         vertex(string vertexName);
+    vector<edge*>   trip(string fromVertex, string toVertex);
+    bool            road(edge edges[]);
+    bool            store(string filename);
+    bool            retrieve(string filename);
+    
 
 
 };

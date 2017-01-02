@@ -14,10 +14,17 @@
 
 #include "vertex.h"
 #include "edge.h"
+#include "road.h"
 #include "roadmap.h"
+
 using namespace std;
 
 vertex::vertex(){}
+
+// for null objects
+vertex::vertex(string nameInput){
+    this->vertexName = nameInput;
+}
 
 vertex::vertex(int vertexTypeInput, string nameInput, int vertexNum){
     this->vertexNumber   = vertexNum;

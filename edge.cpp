@@ -1,32 +1,33 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /* 
  * File:   edge.cpp
  * Author: Anjoom
  * 
- * Created on December 30, 2016, 9:54 AM
  */
 
 #include <iostream>
 #include <stdlib.h>
-#include <limits.h>
+#include <limits>
 #include <float.h>
+#include <cmath>
 #include <string>
 #include <vector>
 #include <stack>
 
 #include "vertex.h"
 #include "edge.h"
+#include "road.h"
 #include "roadmap.h"
+
 using namespace std;
 
 edge::edge(){}
 
+edge::edge(string nameInput){
+    this->edgeName = nameInput;
+}
+
 edge::edge(vertex* vertex1, vertex* vertex2, int directional, double speed, double length) {
+    this->edgeName                  = vertex1->GetVertexName() + "-" + vertex2->GetVertexName();
     this->edgePostedSpeedLimit      = speed;
     this->edgeEffectiveSpeedLimit   = speed;
     this->edgeLength                = length;
@@ -34,14 +35,21 @@ edge::edge(vertex* vertex1, vertex* vertex2, int directional, double speed, doub
     this->edgeEvent                 = 0;
     this->sourceVertex              = vertex1;
     this->destinationVertex         = vertex2;
-    
+        
     this->sourceVertex->addEdgeToAvailableEdgeList(this);
-    if (this->edgeDirection == 1){
-        this->sourceVertex->addEdgeToAvailableEdgeList(this);
-    }
-    else if (this->edgeDirection == 2){
-        this->destinationVertex->addEdgeToAvailableEdgeList(this);
-    }
+    
+    if (speed != 0)
+        this->timeToTravel = length / speed;
+    else
+        this->timeToTravel = DBL_MAX;
+    
+//    if (this->edgeDirection == 1){
+//        this->sourceVertex->addEdgeToAvailableEdgeList(this);
+//    }
+//    else if (this->edgeDirection == 2){
+//        this->sourceVertex->addEdgeToAvailableEdgeList(this);
+//        this->destinationVertex->addEdgeToAvailableEdgeList(this);
+//    }
 }
 
 edge::~edge() {
@@ -56,7 +64,19 @@ int     edge::GetEdgeDirection()            const {return edgeDirection;}
 int     edge::GetEdgeEvent()                const {return edgeEvent;}
 vertex* edge::GetSourceVertex()             const {return sourceVertex;}
 vertex* edge::GetDestinationVertex()        const {return destinationVertex;}
+double  edge::GetTimeToTravel() const               {return timeToTravel;}
 
+void    edge::SetTimeToTravel(double timeToTravel){
+    this->timeToTravel = timeToTravel;
+}
+
+void edge::SetEdgeEffectiveSpeedLimit(double edgeEffectiveSpeedLimit) {
+    this->edgeEffectiveSpeedLimit = edgeEffectiveSpeedLimit;
+}
+
+void edge::SetEdgeEvent(int edgeEvent) {
+    this->edgeEvent = edgeEvent;
+}
 
 // 0 = EVENT_NORMAL, 
 // 1 = EVENT_ACCIDENT_1_WAY, 
@@ -65,22 +85,3 @@ vertex* edge::GetDestinationVertex()        const {return destinationVertex;}
 // 4 = EVENT_ROADBLOCK_2_WAY, 
 // 5 = EVENT_CONSTRUCTION_1_WAY, 
 // 6 = EVENT_CONSTRUCTION_2_WAY,
-int edge::edgeEventStringToInt (string eventName){
-    
-}
-
-int edge::edgeDirectionStringToInt (string edgeDirectionString){
-    if (!edgeDirectionString.compare("ONE-WAY") || 
-        !edgeDirectionString.compare("one-way") ||
-        !edgeDirectionString.compare("ONEWAY") ||
-        !edgeDirectionString.compare("oneway") ){
-        return 1;
-    }
-    if (!edgeDirectionString.compare("TWO-WAY") || 
-        !edgeDirectionString.compare("two-way") ||
-        !edgeDirectionString.compare("TWOWAY") ||
-        !edgeDirectionString.compare("twoway") ){
-        return 2;
-    }
-    return -1;
-}
